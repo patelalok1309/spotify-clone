@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Logo } from '../assets/img'
 import { NavLink } from 'react-router-dom'
 import { FaHome, FaSearch } from 'react-icons/fa';
@@ -7,6 +7,7 @@ import { PiPlusSquareFill } from 'react-icons/pi'
 import { isActiveStyles, isNotActiveStyles } from '../utills/styles'
 import { useStateValue } from '../context/StateProvider'
 import { actionType } from "../context/reducer";
+import '../styles/sidebar.css'
 
 function Sidebar() {
 
@@ -15,11 +16,11 @@ function Sidebar() {
 
   function handleSearch() {
     setToggleSearch(!toggleSearch)
-    console.log('songsearch : ' ,songSearch , toggleSearch)
-      dispatch({
-        type: actionType.SET_SONG_SEARCH,
-        songSearch: toggleSearch,
-      })
+    console.log('songsearch : ', songSearch, toggleSearch)
+    dispatch({
+      type: actionType.SET_SONG_SEARCH,
+      songSearch: toggleSearch,
+    })
   }
 
 

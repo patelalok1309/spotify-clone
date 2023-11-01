@@ -7,7 +7,6 @@ import { GiLoveSong, GiMusicalNotes } from "react-icons/gi";
 import { RiUserStarFill } from "react-icons/ri";
 import { FaUsers } from "react-icons/fa";
 import { bgColors } from '../utills/styles'
-import  Sidebar  from './Sidebar'
 export const DashboardCard = ({ icon, name, count }) => {
   const bg_color = bgColors[parseInt(Math.random() * bgColors.length)];
 
