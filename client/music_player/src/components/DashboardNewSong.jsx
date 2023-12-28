@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-    getStorage,
     ref,
     getDownloadURL,
     uploadBytesResumable,
     deleteObject,
 } from "firebase/storage";
 import { motion } from "framer-motion";
-import { IoMusicalNote } from "react-icons/io5";
 import { BiCloudUpload } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 
@@ -30,7 +28,7 @@ import { filterByLanguage, filters } from "../utills/supportfunctions";
 function DashboardNewSong() {
 
     const [songName, setSongName] = useState();
-    const [{ allArtists, allAlbums, artistFilter, filterTerm, languageFilter, albumFilter, allSongs , alertType }, dispatch] = useStateValue();
+    const [{ allArtists, allAlbums, artistFilter, filterTerm, languageFilter, albumFilter }, dispatch] = useStateValue();
     const [isImageLoading, setIsImageLoading] = useState(false)
     const [songImageCover, setSongImageCover] = useState(null)
     const [imageUploadProgress, setImageUploadProgress] = useState(0)
@@ -69,7 +67,7 @@ function DashboardNewSong() {
                 })
             })
         }
-    }, [])
+    }, [allAlbums, allArtists, dispatch])
 
     const deleteFileObject = (url, isImage) => {
         if (isImage) {
@@ -85,14 +83,14 @@ function DashboardNewSong() {
             setIsAudioLoading(false);
 
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "success"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "success"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
         })
@@ -109,14 +107,14 @@ function DashboardNewSong() {
             setArtistImageCover(null);
             setIsArtistUploading(false);
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "success"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "success"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
         })
@@ -132,14 +130,14 @@ function DashboardNewSong() {
             setAlbumImageCover(null);
             setIsAlbumUploaing(false);
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "success"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "success"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
         })
@@ -148,14 +146,14 @@ function DashboardNewSong() {
     const saveSong = () => {
         if (!songImageCover || !audioImageCover || !songName) {
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "danger"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "danger"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
 
@@ -194,14 +192,14 @@ function DashboardNewSong() {
             dispatch({ type: actionType.SET_FILTER_TERM, filterTerm: null });
 
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "success"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "success"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
         }
@@ -210,14 +208,14 @@ function DashboardNewSong() {
     const saveArtist = () => {
         if (!artistImageCover || !artistName || !twitter || !instagram) {
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "danger"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "danger"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
 
@@ -247,14 +245,14 @@ function DashboardNewSong() {
             setInstagram("")
 
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "success"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "success"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
         }
@@ -264,14 +262,14 @@ function DashboardNewSong() {
     const saveAlbum = () => {
         if (!albumImageCover || !albumName) {
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "danger"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "danger"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
             }, 6000)
 
@@ -297,14 +295,14 @@ function DashboardNewSong() {
             setAlbumName("")
 
             dispatch({
-                type : actionType.SET_ALERT_TYPE,
-                alertType : "success"
+                type: actionType.SET_ALERT_TYPE,
+                alertType: "success"
             })
 
-            setInterval(()=> {
+            setInterval(() => {
                 dispatch({
-                    type : actionType.SET_ALERT_TYPE,
-                    alertType : null
+                    type: actionType.SET_ALERT_TYPE,
+                    alertType: null
                 })
                 console.log('error')
             }, 6000)
@@ -333,7 +331,6 @@ function DashboardNewSong() {
                     <>
                         {!songImageCover ? (<FileUploader updateState={setSongImageCover} setProgress={setImageUploadProgress} isLoading={setIsImageLoading} isImage={true} />) : (
                             <div className="relative w-full h-full overflow-hidden rounded-md">
-                                <img src={songImageCover} className="w-full h-full object-cover" alt="image"/>
                                 <button type="button" className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-200 transition-all ease-in-out"
                                     onClick={() => deleteFileObject(songImageCover, true)}>
                                     <MdDelete className="text-white" />
@@ -380,7 +377,7 @@ function DashboardNewSong() {
                     <>
                         {!artistImageCover ? (<FileUploader updateState={setArtistImageCover} setProgress={setArtistUploadingProecss} isLoading={setIsArtistUploading} isImage={true} />) : (
                             <div className="relative w-full h-full overflow-hidden rounded-md">
-                                <img src={artistImageCover} className="w-full h-full object-cover" alt="image"/>
+                                <img src={artistImageCover} className="w-full h-full object-cover" alt="artistsongs" />
                                 <button type="button" className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-200 transition-all ease-in-out"
                                     onClick={() => deleteArtistObject(artistImageCover, true)}>
                                     <MdDelete className="text-white" />
@@ -426,7 +423,7 @@ function DashboardNewSong() {
                     <>
                         {!albumImageCover ? (<FileUploader updateState={setAlbumImageCover} setProgress={setAlbumUploadingProgress} isLoading={setIsAlbumUploaing} isImage={true} />) : (
                             <div className="relative w-full h-full overflow-hidden rounded-md">
-                                <img src={albumImageCover} className="w-full h-full object-cover" alt="image"/>
+                                <img src={albumImageCover} className="w-full h-full object-cover" alt="image" />
                                 <button type="button" className="absolute bottom-3 right-3 p-3 rounded-full bg-red-500 text-xl cursor-pointer outline-none hover:shadow-md duration-200 transition-all ease-in-out"
                                     onClick={() => deleteAlbumObject(albumImageCover, true)}>
                                     <MdDelete className="text-white" />
@@ -495,7 +492,7 @@ export const FileLoader = ({ progress }) => {
 
             <div className="h-screen bg-white">
                 <div className="flex justify-center items-center h-full">
-                    <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="image" />
+                    <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="iphone" />
                 </div>
             </div>
         </div>

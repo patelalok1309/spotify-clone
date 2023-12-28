@@ -6,3 +6,6 @@ package-lock.json
 
 serviceAccountKey.json
 serviceAccountKey
+
+firebase.config.js
+firebase.config
